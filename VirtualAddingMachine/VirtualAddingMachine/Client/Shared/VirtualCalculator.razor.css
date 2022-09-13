@@ -1,19 +1,18 @@
-/* /Shared/VirtualCalculator.razor.rz.scp.css */
-.page[b-9akrbdhb4s] {
+.page {
     position: relative;
     display: flex;
     flex-direction: column;
 }
 
-main[b-9akrbdhb4s] {
+main {
     flex: 1;
 }
 
-.sidebar[b-9akrbdhb4s] {
+.sidebar {
     background-image: linear-gradient(180deg, rgb(5, 39, 103) 0%, #3a0647 70%);
 }
 
-.top-row[b-9akrbdhb4s] {
+.top-row {
     background-color: #f7f7f7;
     border-bottom: 1px solid #d6d5d5;
     justify-content: flex-end;
@@ -22,34 +21,34 @@ main[b-9akrbdhb4s] {
     align-items: center;
 }
 
-    .top-row[b-9akrbdhb4s]  a, .top-row[b-9akrbdhb4s]  .btn-link {
+    .top-row ::deep a, .top-row ::deep .btn-link {
         white-space: nowrap;
         margin-left: 1.5rem;
         text-decoration: none;
     }
 
-        .top-row[b-9akrbdhb4s]  a:hover, .top-row[b-9akrbdhb4s]  .btn-link:hover {
+        .top-row ::deep a:hover, .top-row ::deep .btn-link:hover {
             text-decoration: underline;
         }
 
-        .top-row[b-9akrbdhb4s]  a:first-child {
+        .top-row ::deep a:first-child {
             overflow: hidden;
             text-overflow: ellipsis;
         }
 
-*[b-9akrbdhb4s] {
+* {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
     font-family: "Roboto Mono", monospace;
 }
 
-body[b-9akrbdhb4s] {
+body {
     height: 100vh;
     background: linear-gradient(to bottom, #f9544c 50%, #090c31 50%);
 }
 
-.calculator[b-9akrbdhb4s] {
+.calculator {
     width: 400px;
     background-color: #b8b8b4;
     padding: 50px 30px;
@@ -62,11 +61,11 @@ body[b-9akrbdhb4s] {
     box-shadow: 0 20px 50px rgba(0, 5, 24, 0.4);
 }
 
-.display[b-9akrbdhb4s] {
+.display {
     width: 100%;
 }
 
-    .display input[b-9akrbdhb4s] {
+    .display input {
         width: 100%;
         padding: 15px 10px;
         text-align: right;
@@ -75,11 +74,11 @@ body[b-9akrbdhb4s] {
         font-size: 35px;
     }
 
-        .display input[b-9akrbdhb4s]::placeholder {
+        .display input::placeholder {
             color: black;
         }
 
-.buttons[b-9akrbdhb4s] {
+.buttons {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 20px;
@@ -88,7 +87,7 @@ body[b-9akrbdhb4s] {
     border-radius: 25px;
 }
 
-    .buttons input[type="button"][b-9akrbdhb4s] {
+    .buttons input[type="button"] {
         font-size: 20px;
         padding: 17px;
         background-color: transparent;
@@ -98,62 +97,62 @@ body[b-9akrbdhb4s] {
         border-radius: 5px;
     }
 
-        .buttons input[type="button"]:hover[b-9akrbdhb4s] {
+        .buttons input[type="button"]:hover {
             box-shadow: 0 8px 25px #000d2e;
         }
 
-input[type="button"]#equal[b-9akrbdhb4s] {
+input[type="button"]#equal {
     grid-column: span 2;
     background-color: #f9544c;
 }
 
-input[type="button"].btnB[b-9akrbdhb4s] {
+input[type="button"].btnB {
     background-color: #5291cc;
 }
 
-input[type="text"][b-9akrbdhb4s]{
+input[type="text"]{
    color: black;
 }
 
 @media (max-width: 640.98px) {
-    .top-row:not(.auth)[b-9akrbdhb4s] {
+    .top-row:not(.auth) {
         display: none;
     }
 
-    .top-row.auth[b-9akrbdhb4s] {
+    .top-row.auth {
         justify-content: space-between;
     }
 
-    .top-row[b-9akrbdhb4s]  a, .top-row[b-9akrbdhb4s]  .btn-link {
+    .top-row ::deep a, .top-row ::deep .btn-link {
         margin-left: 0;
     }
 }
 
 @media (min-width: 641px) {
-    .page[b-9akrbdhb4s] {
+    .page {
         flex-direction: row;
     }
 
-    .sidebar[b-9akrbdhb4s] {
+    .sidebar {
         width: 250px;
         height: 100vh;
         position: sticky;
         top: 0;
     }
 
-    .top-row[b-9akrbdhb4s] {
+    .top-row {
         position: sticky;
         top: 0;
         z-index: 1;
     }
 
-        .top-row.auth[b-9akrbdhb4s]  a:first-child {
+        .top-row.auth ::deep a:first-child {
             flex: 1;
             text-align: right;
             width: 0;
         }
 
-    .top-row[b-9akrbdhb4s], article[b-9akrbdhb4s] {
+    .top-row, article {
         padding-left: 2rem !important;
         padding-right: 1.5rem !important;
     }

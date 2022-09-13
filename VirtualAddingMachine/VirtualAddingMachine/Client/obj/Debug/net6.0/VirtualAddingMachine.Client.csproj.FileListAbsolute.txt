@@ -812,7 +812,6 @@ C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachin
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\blazor.boot.json
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\staticwebassets.build.json
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\staticwebassets.development.json
-C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\scopedcss\Shared\MainLayout.razor.rz.scp.css
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\scopedcss\bundle\VirtualAddingMachine.Client.styles.css
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\scopedcss\projectbundle\VirtualAddingMachine.Client.bundle.scp.css
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\VirtualAddingMachine.Client.csproj.CopyComplete
@@ -820,3 +819,4 @@ C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachin
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\refint\VirtualAddingMachine.Client.dll
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\VirtualAddingMachine.Client.pdb
 C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\ref\VirtualAddingMachine.Client.dll
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Client\obj\Debug\net6.0\scopedcss\Shared\VirtualCalculator.razor.rz.scp.css
