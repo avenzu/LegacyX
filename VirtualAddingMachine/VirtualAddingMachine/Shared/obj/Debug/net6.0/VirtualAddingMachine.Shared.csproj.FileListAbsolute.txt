@@ -1,0 +1,12 @@
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\bin\Debug\net6.0\VirtualAddingMachine.Shared.deps.json
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\bin\Debug\net6.0\VirtualAddingMachine.Shared.dll
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\bin\Debug\net6.0\VirtualAddingMachine.Shared.pdb
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.csproj.AssemblyReference.cache
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.AssemblyInfoInputs.cache
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.AssemblyInfo.cs
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.csproj.CoreCompileInputs.cache
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.dll
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\refint\VirtualAddingMachine.Shared.dll
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\VirtualAddingMachine.Shared.pdb
+C:\Users\lucif\OneDrive\Desktop\LegacyX\VirtualAddingMachine\VirtualAddingMachine\Shared\obj\Debug\net6.0\ref\VirtualAddingMachine.Shared.dll
