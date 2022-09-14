@@ -1,6 +1,6 @@
 ﻿@inherits LayoutComponentBase
-@using VirtualAddingMachine.Client.Methods
-@inject calculations _Calculations
+@*@using VirtualAddingMachine.Client.Methods
+@inject calculations _Calculations*@
 
 <PageTitle>Virtual Calculator</PageTitle>
 <link rel="stylesheet" type="text/css" href="/VirtualCalculator.razor.css" />
@@ -33,7 +33,7 @@
 
                     <input type="button" value="1" class="input-button" />
                     <input type="button" value="2" class="input-button" />
-                    <input type="button" value="3" class="input-button"
+                    <input type="button" value="3" class="input-button" />
                     <input type="button" value="+" class="input-button btnB" />
 
                     <input type="button" value="0" class="input-button" />
@@ -52,26 +52,25 @@
 </body>
 
 @code {
-    private string _num1;
-    private double _num1Double => Convert.ToDouble(_num1);
-    private string _num2;
-    private double _num2Double => Convert.ToDouble(_num2);
-    private string _finalResult;
+    //private string _num1;
+    //private double _num1Double => Convert.ToDouble(_num1);
+    //private string _num2;
+    //private double _num2Double => Convert.ToDouble(_num2);
+    //private string _finalResult;
 
-    void Addition()
-    {
-        _finalResult = _Calculations.Addition(_num1Double, _num2Double).ToString();
-    }
-    void Subtraction()
-    {
-        _finalResult = _Calculations.Subtraction(_num1Double, _num2Double).ToString();
-    }
-    void Multiplication()
-    {
-        _finalResult = _Calculations.Multiplication(_num1Double, _num2Double).ToString();
-    }
-
-    }
+    //void Addition()
+    //{
+    //    _finalResult = _Calculations.Addition(_num1Double, _num2Double).ToString();
+    //}
+    //void Subtraction()
+    //{
+    //    _finalResult = _Calculations.Subtraction(_num1Double, _num2Double).ToString();
+    //}
+    //void Multiplication()
+    //{
+    //    _finalResult = _Calculations.Multiplication(_num1Double, _num2Double).ToString();
+    //}
+}
 <article class="content px-4">
     @Body
 </article>
