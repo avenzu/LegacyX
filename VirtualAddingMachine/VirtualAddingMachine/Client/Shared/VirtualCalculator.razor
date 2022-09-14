@@ -1,56 +1,79 @@
 ﻿@inherits LayoutComponentBase
+@using VirtualAddingMachine.Client.Methods
+@inject calculations _Calculations
 
 <PageTitle>Virtual Calculator</PageTitle>
 <link rel="stylesheet" type="text/css" href="/VirtualCalculator.razor.css" />
-<div>
-    <main>
-        <body>
+<body>
+    <div>
+
+
+        <main>
             <div class="calculator">
                 <div class="display">
-                    <input type="text" placeholder="0" id="input" disabled/>
+                    <input type="text" placeholder="0" id="input" disabled />
                 </div>
                 <div class="buttons">
-                    <!-- Full Erase -->
+
                     <input type="button" value="AC" id="clear" />
-                    <!-- Erase Single Value -->
+
                     <input type="button" value="DEL" id="erase" />
                     <input type="button" value="%" class="input-button btnB" />
                     <input type="button" value="/" class="input-button btnB" />
-                    
+
                     <input type="button" value="7" class="input-button" />
                     <input type="button" value="8" class="input-button" />
                     <input type="button" value="9" class="input-button" />
                     <input type="button" value="*" class="input-button btnB" />
-                    
+
                     <input type="button" value="6" class="input-button" />
                     <input type="button" value="5" class="input-button" />
                     <input type="button" value="4" class="input-button" />
                     <input type="button" value="-" class="input-button btnB" />
-                    
+
                     <input type="button" value="1" class="input-button" />
                     <input type="button" value="2" class="input-button" />
-                    <input type="button" value="3" class="input-button" 
+                    <input type="button" value="3" class="input-button"
                     <input type="button" value="+" class="input-button btnB" />
-                    
+
                     <input type="button" value="0" class="input-button" />
                     <input type="button" value="." class="input-button" />
                     <input type="button" value="=" id="equal" />
 
-                    
 
-                   @* <input type="button" value="(" class="input-button" />
+
+                    @* <input type="button" value="(" class="input-button" />
                     <input type="button" value=")" class="input-button" />*@
                 </div>
             </div>
-            <!-- Script -->
 
-        </body>
+        </main>
+    </div>
+</body>
 
-        @code {
+@code {
+    private string _num1;
+    private double _num1Double => Convert.ToDouble(_num1);
+    private string _num2;
+    private double _num2Double => Convert.ToDouble(_num2);
+    private string _finalResult;
 
-        }
-        <article class="content px-4">
-            @Body
-        </article>
-    </main>
-</div>
+    void Addition()
+    {
+        _finalResult = _Calculations.Addition(_num1Double, _num2Double).ToString();
+    }
+    void Subtraction()
+    {
+        _finalResult = _Calculations.Subtraction(_num1Double, _num2Double).ToString();
+    }
+    void Multiplication()
+    {
+        _finalResult = _Calculations.Multiplication(_num1Double, _num2Double).ToString();
+    }
+
+    }
+<article class="content px-4">
+    @Body
+</article>
+
+
