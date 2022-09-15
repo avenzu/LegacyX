@@ -15,4 +15,8 @@
     <ProjectReference Include="..\Shared\VirtualAddingMachine.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Images\" />
+  </ItemGroup>
+
 </Project>
