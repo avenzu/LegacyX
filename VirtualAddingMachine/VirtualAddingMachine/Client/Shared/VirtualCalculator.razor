@@ -9,30 +9,16 @@
 
             <div class="calculator">
                 <div class="display">
-                    <input type="text" value="0" id="input" />
-
-                    @if (num_1 != 0)
-                    {
-                        @num_1
-                    }
-
-                    @operation
-
-                    @if (num_2 != 0)
-                    {
-                        @num_2
-
-                    }
-
-                    @result
+                    <input type="text" placeholder="0" id="input" @bind="Display" />
                 </div>
+
                 <div class="buttons">
 
                     <input type="button" value="AC" id="clear" @onclick="Clear" />
 
                     <input type="button" value="DEL" id="erase" />
                     <input type="button" value="%" class="input-button btnB" @onclick="() => OperationChar('%')" />
-                    <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" />
+                    <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" /> 
 
                     <input type="button" value="9" class="input-button" @onclick="() => Add(9)" />
                     <input type="button" value="8" class="input-button" @onclick="() => Add(8)" />
@@ -76,13 +62,13 @@
 </body>
 
 @code {
-    int i = 0;
+    
     double num_1 = 0, num_2 = 0;
 
     char operation;
-    string result;
+    string? result;
 
-    public string Display { get; set; }
+    public string? Display { get; set; }
 
     protected override void OnInitialized()
     {
@@ -94,18 +80,22 @@
         if (operation == ' ')
         {
             num_1 = /*num_1 * 10 + */input;
+            Display += num_1.ToString();
         }
         else
         {
             num_2 = /*num_2 * 10 +*/ input;
+            Display += num_2.ToString();
         }
-
     }
 
     private void OperationChar(char op)
     {
         if (operation == ' ')
+        {
             operation = op;
+            Display += operation;
+        }
         else
             Result();
     }
@@ -131,6 +121,7 @@
                 result = (num_1 % num_2).ToString();
                 break;
         }
+        Display = result;
         Clear(true);
     }
 
@@ -144,7 +135,8 @@
 
         if (!flag)
         {
-            result = null;
+            result = " ";
+            Display = " ";
         }
 
         num_1 = 0;
