@@ -8,12 +8,12 @@
 
 body {
     height: 100vh;
-    background: linear-gradient(to bottom, #f9544c 50%, #090c31 50%);
+    background: #787468;
 }
 
 main {
     display: grid;
-    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-columns: 1fr 2fr 1fr 2fr;
     grid-gap: 20px;
 }
 
@@ -21,7 +21,7 @@ main {
     width: 400px;
     background-color: #b8b8b4;
     padding: 50px 30px;
-    transform: translate(40%,10%);
+    transform: translate(40%,5%);
     top: 50%;
     left: 30%;
     border-radius: 8px;
@@ -47,9 +47,9 @@ main {
         font-size: 35px;
     }
 
-        .display input::placeholder {
+       /* .display input  {
             color: black;
-        }
+        }*/
 
 .buttons {
     display: grid;
@@ -96,7 +96,7 @@ input[type="text"] {
 
 .calcText {
     background: url("../Images/note.png") no-repeat scroll 0 0 transparent;
-    background-size: 271px 420px;
+    background-size: 900px 900px;
     padding: 210px 100px;
     text-align: left;
     overflow: hidden;
@@ -104,7 +104,8 @@ input[type="text"] {
     width: 271px;
     height: 420px;
     line-height: 16px;
-    border: 0px;
+    border: 2px solid black ;
+    border-radius: 10px;
     resize: none;
 }
 
@@ -112,11 +113,12 @@ input.action-button {
     height: 50px;
     width: 50px;
     background-size: 25px 25px;
-    background-color: transparent;
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
-    font-size: 0;
+    font-size: 0; 
+    border-radius: 10px;
+    margin-left: 15px;
 }
 
 input[value="edit"] {

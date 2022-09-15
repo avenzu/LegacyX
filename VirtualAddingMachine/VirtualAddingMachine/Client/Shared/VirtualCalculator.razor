@@ -1,6 +1,5 @@
 ﻿@inherits LayoutComponentBase
-@*@using VirtualAddingMachine.Client.Methods
-@inject calculations _Calculations*@
+@using System.Globalization
 
 <PageTitle>Virtual Calculator</PageTitle>
 <link rel="stylesheet" type="text/css" href="/VirtualCalculator.razor.css" />
@@ -10,39 +9,50 @@
 
             <div class="calculator">
                 <div class="display">
-                    <input type="text" placeholder="0" id="input" disabled />
+                    <input type="text" value="0" id="input" />
+
+                    @if (num_1 != 0)
+                    {
+                        @num_1
+                    }
+
+                    @operation
+
+                    @if (num_2 != 0)
+                    {
+                        @num_2
+
+                    }
+
+                    @result
                 </div>
                 <div class="buttons">
 
-                    <input type="button" value="AC" id="clear" />
+                    <input type="button" value="AC" id="clear" @onclick="Clear" />
 
                     <input type="button" value="DEL" id="erase" />
-                    <input type="button" value="%" class="input-button btnB" />
-                    <input type="button" value="/" class="input-button btnB" />
+                    <input type="button" value="%" class="input-button btnB" @onclick="() => OperationChar('%')" />
+                    <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" />
 
-                    <input type="button" value="7" class="input-button" />
-                    <input type="button" value="8" class="input-button" />
-                    <input type="button" value="9" class="input-button" />
-                    <input type="button" value="*" class="input-button btnB" />
+                    <input type="button" value="9" class="input-button" @onclick="() => Add(9)" />
+                    <input type="button" value="8" class="input-button" @onclick="() => Add(8)" />
+                    <input type="button" value="7" class="input-button" @onclick="() => Add(7)" />
+                    <input type="button" value="X" class="input-button btnB" @onclick="() => OperationChar('X')" />
 
-                    <input type="button" value="6" class="input-button" />
-                    <input type="button" value="5" class="input-button" />
-                    <input type="button" value="4" class="input-button" />
-                    <input type="button" value="-" class="input-button btnB" />
+                    <input type="button" value="6" class="input-button" @onclick="() => Add(6)" />
+                    <input type="button" value="5" class="input-button" @onclick="() => Add(5)" />
+                    <input type="button" value="4" class="input-button" @onclick="() => Add(4)" />
+                    <input type="button" value="-" class="input-button btnB" @onclick="() => OperationChar('-')" />
 
-                    <input type="button" value="1" class="input-button" />
-                    <input type="button" value="2" class="input-button" />
-                    <input type="button" value="3" class="input-button" />
-                    <input type="button" value="+" class="input-button btnB" />
+                    <input type="button" value="3" class="input-button" @onclick="() => Add(3)" />
+                    <input type="button" value="2" class="input-button" @onclick="() => Add(2)" />
+                    <input type="button" value="1" class="input-button" @onclick="() => Add(1)" />
+                    <input type="button" value="+" class="input-button btnB" @onclick="() => OperationChar('+')" />
 
-                    <input type="button" value="0" class="input-button" />
+                    <input type="button" value="0" class="input-button" @onclick="() => Add(0)" />
                     <input type="button" value="." class="input-button" />
-                    <input type="button" value="=" id="equal" />
+                    <input type="button" value="=" id="equal" @onclick="Result" />
 
-
-
-                    @* <input type="button" value="(" class="input-button" />
-                    <input type="button" value=")" class="input-button" />*@
                 </div>
             </div>
 
@@ -57,11 +67,6 @@
                     <input type="button" value="download" class="action-button" />
                     <input type="button" value="delete" class="action-button" />
                     <input type="button" value="print" class="action-button" />
-                    
-                    @*<img class="action-button" src="../Images/edit.png" />
-                    <img class="action-button" src="../Images/download.png" />
-                    <img class="action-button" src="../Images/delete.png" />
-                    <img class="action-button" src="../Images/print.png" />*@
                 </div>
 
             </div>
@@ -71,24 +76,81 @@
 </body>
 
 @code {
-    //private string _num1;
-    //private double _num1Double => Convert.ToDouble(_num1);
-    //private string _num2;
-    //private double _num2Double => Convert.ToDouble(_num2);
-    //private string _finalResult;
+    int i = 0;
+    double num_1 = 0, num_2 = 0;
 
-    //void Addition()
-    //{
-    //    _finalResult = _Calculations.Addition(_num1Double, _num2Double).ToString();
-    //}
-    //void Subtraction()
-    //{
-    //    _finalResult = _Calculations.Subtraction(_num1Double, _num2Double).ToString();
-    //}
-    //void Multiplication()
-    //{
-    //    _finalResult = _Calculations.Multiplication(_num1Double, _num2Double).ToString();
-    //}
+    char operation;
+    string result;
+
+    public string Display { get; set; }
+
+    protected override void OnInitialized()
+    {
+        operation = ' ';
+    }
+
+    public void Add(int input)
+    {
+        if (operation == ' ')
+        {
+            num_1 = /*num_1 * 10 + */input;
+        }
+        else
+        {
+            num_2 = /*num_2 * 10 +*/ input;
+        }
+
+    }
+
+    private void OperationChar(char op)
+    {
+        if (operation == ' ')
+            operation = op;
+        else
+            Result();
+    }
+
+    private void Result()
+    {
+        switch (operation)
+        {
+            case '+':
+                result = (num_1 + num_2).ToString();
+                break;
+            case '-':
+                result = (num_1 - num_2).ToString();
+                break;
+            case 'X':
+                result = (num_1 * num_2).ToString();
+                break;
+            case '/':
+                if (num_2 > 0)
+                    result = (num_1 / num_2).ToString();
+                break;
+            case '%':
+                result = (num_1 % num_2).ToString();
+                break;
+        }
+        Clear(true);
+    }
+
+    void Clear()
+    {
+        Clear(false);
+    }
+    void Clear(bool flag)
+    {
+        operation = ' ';
+
+        if (!flag)
+        {
+            result = null;
+        }
+
+        num_1 = 0;
+        num_2 = 0;
+    }
+
 }
 <article class="content px-4">
     @Body
