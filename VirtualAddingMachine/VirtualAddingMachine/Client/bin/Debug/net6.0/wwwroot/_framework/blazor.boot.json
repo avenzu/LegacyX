@@ -197,14 +197,14 @@
       "netstandard.dll": "sha256-+SGdnDhVMiZ9hq0EsYwJ+mcK0odf3bAtXnSKLorGDCs=",
       "System.Private.CoreLib.dll": "sha256-mqfalNg3wC8XHlyA+j5ioNcnc0kt4prNudKdyJoaYaU=",
       "VirtualAddingMachine.Shared.dll": "sha256-yG6e1gi0Emi\/yVuGrOHhBQFbhQ+vumioKnOyzFZLoaI=",
-      "VirtualAddingMachine.Client.dll": "sha256-RtaE4+\/cjEEzrM1yFW4oPeLJMoc\/7KhQBylF4H3TGIc="
+      "VirtualAddingMachine.Client.dll": "sha256-VT88N4bmn5HIqsga6ZFoR1BzkVY8E3GyuuZ9NDEN\/7Q="
     },
     "extensions": null,
     "lazyAssembly": null,
     "libraryInitializers": null,
     "pdb": {
       "VirtualAddingMachine.Shared.pdb": "sha256-IDkxQ+HPkal0\/sCiUoJ1oMkhoYeA1DM6+VxPzLy6p48=",
-      "VirtualAddingMachine.Client.pdb": "sha256-d+FdvfHR7h4RNOe\/jd9iv4cD\/mLtgJTZWTSJWlvEJc0="
+      "VirtualAddingMachine.Client.pdb": "sha256-dl9ZOoAZdmAmHfUvLRcrIxYXt68E6rcfGzW\/ZadbA5A="
     },
     "runtime": {
       "dotnet.6.0.9.c6f1nuy339.js": "sha256-Azk5sbYFVo84h8NpIst9roIPGLH2y8ewQ9SY\/sUHvgs=",
