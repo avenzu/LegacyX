@@ -89,13 +89,14 @@ input[type="text"] {
 
 .actionBtns {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, auto);
     margin-top: 40px;
-    grid-gap:10px; 
+    grid-gap: 10px;
 }
 
 .calcText {
-    background: url("../Images/note.png") top no-repeat #fff;
+    background: url("../Images/note.png") no-repeat scroll 0 0 transparent;
+    background-size: 271px 420px;
     padding: 210px 100px;
     text-align: left;
     overflow: hidden;
@@ -105,33 +106,33 @@ input[type="text"] {
     line-height: 16px;
     border: 0px;
     resize: none;
-   
 }
 
-.action-button {
-    height: 200%;
-    width: 50%;
+input.action-button {
+    height: 50px;
+    width: 50px;
+    background-size: 25px 25px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    font-size: 0;
 }
+
 input[value="edit"] {
-    /*background: url("../Images/edit.png") no-repeat scroll 0 0 transparent;*/
-
-   
+    background-image: url("../Images/edit.png");
 }
 
 input[value="download"] {
-    /*background: url("../Images/download.png") no-repeat scroll 0 0 transparent;*/
-    
+    background-image: url("../Images/download.png");
 }
 
 input[value="delete"] {
-    /*background: url("../Images/delete.png") no-repeat scroll 0 0 transparent;*/
-    /*font-size: 12px;*/
-    
+    background-image: url("../Images/delete.png");
 }
 
 input[value="print"] {
-    /*background: url("../Images/print.png") no-repeat scroll 0 0 transparent;*/
-    
+    background-image: url("../Images/print.png");
 }
 
 @media (min-width: 641px) {

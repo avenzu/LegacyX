@@ -89,13 +89,14 @@ input[type="text"][b-9akrbdhb4s] {
 
 .actionBtns[b-9akrbdhb4s] {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(2, auto);
     margin-top: 40px;
-    grid-gap:10px; 
+    grid-gap: 10px;
 }
 
 .calcText[b-9akrbdhb4s] {
-    background: url("../Images/note.png") top no-repeat #fff;
+    background: url("../Images/note.png") no-repeat scroll 0 0 transparent;
+    background-size: 271px 420px;
     padding: 210px 100px;
     text-align: left;
     overflow: hidden;
@@ -105,33 +106,33 @@ input[type="text"][b-9akrbdhb4s] {
     line-height: 16px;
     border: 0px;
     resize: none;
-   
 }
 
-.action-button[b-9akrbdhb4s] {
-    height: 200%;
-    width: 50%;
+input.action-button[b-9akrbdhb4s] {
+    height: 50px;
+    width: 50px;
+    background-size: 25px 25px;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    cursor: pointer;
+    font-size: 0;
 }
+
 input[value="edit"][b-9akrbdhb4s] {
-    /*background: url("../Images/edit.png") no-repeat scroll 0 0 transparent;*/
-
-   
+    background-image: url("../Images/edit.png");
 }
 
 input[value="download"][b-9akrbdhb4s] {
-    /*background: url("../Images/download.png") no-repeat scroll 0 0 transparent;*/
-    
+    background-image: url("../Images/download.png");
 }
 
 input[value="delete"][b-9akrbdhb4s] {
-    /*background: url("../Images/delete.png") no-repeat scroll 0 0 transparent;*/
-    /*font-size: 12px;*/
-    
+    background-image: url("../Images/delete.png");
 }
 
 input[value="print"][b-9akrbdhb4s] {
-    /*background: url("../Images/print.png") no-repeat scroll 0 0 transparent;*/
-    
+    background-image: url("../Images/print.png");
 }
 
 @media (min-width: 641px) {
