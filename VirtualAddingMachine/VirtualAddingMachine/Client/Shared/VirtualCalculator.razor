@@ -110,6 +110,8 @@ backbone of the project
     // to show dat on tape roll
     public string? tapeDisplay { get; set; }
 
+    #region METHODS
+
     // reset operation on every initialization (saftey net, learnt on a blazor 101 video)
     protected override void OnInitialized()
     {
@@ -123,7 +125,7 @@ backbone of the project
      */
     private void Add(char input)
     {
-        bool isNumber = Decimal.TryParse(input.ToString(), out decimal number);  // to make sure parsed number is a decimal
+        bool isNumber = Decimal.TryParse(input.ToString(), out decimal number);  // to make sure parsed data is a number
         
         lastAction = Action.Input;
 
@@ -184,6 +186,74 @@ backbone of the project
 
             isAfterDecimalPt = true;
         }
+    }
+
+    /*
+       * receive operation input to perform calculation accordingly
+       */
+    private void OperationChar(char op)
+    {
+
+        if (operation == ' ')
+        {
+            // change the stage
+            lastAction = Action.Operation;
+
+            operation = op;
+
+            Display += operation;
+
+            // reset helper decimal variables
+            isAfterDecimalPt = false;
+
+            positionAfterDecimalPt = 0;
+        }
+        else
+        {
+            Result();
+        }
+    }
+
+    /*
+     * perform appropriate math calculation matches the operation input
+     */
+    private void Result()
+    {
+        switch (operation)
+        {
+            case '+':
+                result = num_1 + num_2;
+                break;
+            case '-':
+                result = num_1 - num_2;
+                break;
+            case 'X':
+                result = num_1 * num_2;
+                break;
+            case '/':
+                if (num_2 > 0)
+                    result = num_1 / num_2;
+                break;
+            case '%':
+                result = num_1 % num_2;
+                break;
+        }
+
+        // tranfer entire calculation to the tape roll and,
+        // update calc disaply
+        tapeDisplay += Display + " = " + result + "\n";
+        Display = result.ToString();
+
+        // make everything ready for the continuous calculation
+        num_1 = result;
+        if (Display.Contains("."))
+        {
+            isAfterDecimalPt = true;
+            positionAfterDecimalPt = Display.Substring(Display.IndexOf(".")).Length - 1;
+        }
+
+        // just clean the operation and second input for the next calculation
+        Clear(true);
     }
 
     /*
@@ -253,74 +323,7 @@ backbone of the project
         }
     }
 
-    /*
-     * receive operation input to perform calculation accordingly
-     */
-    private void OperationChar(char op)
-    {
-        
-        if (operation == ' ')
-        {
-            // change the stage
-            lastAction = Action.Operation;
-
-            operation = op;
-            
-            Display += operation;
-            
-            // reset helper decimal variables 
-            isAfterDecimalPt = false;
-            
-            positionAfterDecimalPt = 0;
-        }
-        else
-        {
-            Result();
-        }
-    }
-
-    /*
-     * perform appropriate math calculation matches the operation input 
-     */
-    private void Result()
-    {
-        switch (operation)
-        {
-            case '+':
-                result = num_1 + num_2;
-                break;
-            case '-':
-                result = num_1 - num_2;
-                break;
-            case 'X':
-                result = num_1 * num_2;
-                break;
-            case '/':
-                if (num_2 > 0)
-                    result = num_1 / num_2;
-                break;
-            case '%':
-                result = num_1 % num_2;
-                break;
-        }
-
-        // tranfer entire calculation to the tape roll and,
-        // update calc disaply 
-        tapeDisplay += Display + " = " + result + "\n";
-        Display = result.ToString();
-        
-        // make everything ready for the continuous calculation 
-        num_1 = result;
-        if (Display.Contains("."))
-        {
-            isAfterDecimalPt = true;
-            positionAfterDecimalPt = Display.Substring(Display.IndexOf(".")).Length - 1;
-        }
-
-        // just clean the operation and second input for the next calculation 
-        Clear(true);
-    }
-
+  
     // helper All Clear, call main Clear function
     private void Clear()
     {
@@ -374,6 +377,8 @@ backbone of the project
     {
         await JSRuntime.InvokeVoidAsync("focusTextArea", calculatorHistory);
     }
+
+    #endregion
 }
 
 <article class="content px-4">
