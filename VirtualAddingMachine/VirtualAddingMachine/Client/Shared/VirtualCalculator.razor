@@ -10,15 +10,29 @@
             <div class="calculator">
                 <div class="display">
                     <input type="text" placeholder="0" id="input" @bind="Display" />
-                </div>
 
+                    @*  @if (num_1 != 0)
+                    {
+                    @num_1
+                    }
+
+                    @operation
+
+                    @if (num_2 != 0)
+                    {
+                    @num_2
+
+                    }
+
+                    @result*@
+                </div>
                 <div class="buttons">
 
                     <input type="button" value="AC" id="clear" @onclick="Clear" />
 
                     <input type="button" value="DEL" id="erase" />
                     <input type="button" value="%" class="input-button btnB" @onclick="() => OperationChar('%')" />
-                    <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" /> 
+                    <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" />
 
                     <input type="button" value="9" class="input-button" @onclick="() => Add(9)" />
                     <input type="button" value="8" class="input-button" @onclick="() => Add(8)" />
@@ -44,7 +58,7 @@
 
             <div class="tapeRoll">
                 <div class="tape">
-                    <textarea class="calcText">
+                    <textarea class="calcText" AutoSize="true" @bind="@tapeDisplay">
 
                     </textarea>
                 </div>
@@ -62,30 +76,33 @@
 </body>
 
 @code {
-    
     double num_1 = 0, num_2 = 0;
 
     char operation;
     string? result;
 
     public string? Display { get; set; }
+    public string? tapeDisplay { get; set; }
+
+    //List<string> tapeDisplay = new List<string>();
 
     protected override void OnInitialized()
     {
         operation = ' ';
+        tapeDisplay = string.Empty;
     }
 
     public void Add(int input)
     {
         if (operation == ' ')
         {
-            num_1 = /*num_1 * 10 + */input;
-            Display += num_1.ToString();
+            num_1 = num_1 * 10 + input;
+            Display += input.ToString();
         }
         else
         {
-            num_2 = /*num_2 * 10 +*/ input;
-            Display += num_2.ToString();
+            num_2 = num_2 * 10 + input;
+            Display += input.ToString();
         }
     }
 
@@ -121,6 +138,10 @@
                 result = (num_1 % num_2).ToString();
                 break;
         }
+        //tapeDisplay.Add(Display + " = " + result);
+
+        tapeDisplay += Display + " = " + result + "\n";
+
         Display = result;
         Clear(true);
     }
@@ -131,14 +152,14 @@
     }
     void Clear(bool flag)
     {
-        operation = ' ';
-
         if (!flag)
         {
-            result = " ";
-            Display = " ";
-        }
 
+            result = string.Empty;
+            Display = string.Empty;
+
+        }
+        operation = ' ';
         num_1 = 0;
         num_2 = 0;
     }
