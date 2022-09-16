@@ -84,8 +84,6 @@
     public string? Display { get; set; }
     public string? tapeDisplay { get; set; }
 
-    //List<string> tapeDisplay = new List<string>();
-
     protected override void OnInitialized()
     {
         operation = ' ';
@@ -138,7 +136,6 @@
                 result = (num_1 % num_2).ToString();
                 break;
         }
-        //tapeDisplay.Add(Display + " = " + result);
 
         tapeDisplay += Display + " = " + result + "\n";
 
