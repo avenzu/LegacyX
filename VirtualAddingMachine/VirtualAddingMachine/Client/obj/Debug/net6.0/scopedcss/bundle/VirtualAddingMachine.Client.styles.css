@@ -134,5 +134,10 @@ input[value="print"][b-9akrbdhb4s] {
     background-image: url("../Images/print.png");
 }
 
+#favicon[b-9akrbdhb4s] {
+    height: 25px;
+    width: 25px;
+}
+
 @media screen and (max-width: 800px) {
 }

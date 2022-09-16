@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "xz8dEdNcAkfiZEwg/bnC6DARqsKA+Z7y5KFak7I9v0Q=",
+  "Hash": "O18zThkGjtJ6lAaAIHgjF5W7pBWSUOD72Ygzg9VL4K8=",
   "Source": "VirtualAddingMachine.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -7138,6 +7138,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icon-192.png"
+    },
+    {
+      "Identity": "C:\\Users\\lucif\\OneDrive\\Desktop\\LegacyX\\VirtualAddingMachine\\VirtualAddingMachine\\Client\\wwwroot\\Images\\calc.png",
+      "SourceId": "VirtualAddingMachine.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lucif\\OneDrive\\Desktop\\LegacyX\\VirtualAddingMachine\\VirtualAddingMachine\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "Images/calc.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\Images\\calc.png"
     },
     {
       "Identity": "C:\\Users\\lucif\\OneDrive\\Desktop\\LegacyX\\VirtualAddingMachine\\VirtualAddingMachine\\Client\\wwwroot\\Images\\delete.png",

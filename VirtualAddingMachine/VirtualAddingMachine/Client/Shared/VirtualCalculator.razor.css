@@ -1,3 +1,8 @@
+/*
+File : VirtualCalculator.razor.css
+Author : Akash Patel
+Date : 16 Sep 2022
+*/
 
 * {
     padding: 0;
@@ -131,6 +136,11 @@ input[value="delete"] {
 
 input[value="print"] {
     background-image: url("../Images/print.png");
+}
+
+#favicon {
+    height: 25px;
+    width: 25px;
 }
 
 @media screen and (max-width: 800px) {

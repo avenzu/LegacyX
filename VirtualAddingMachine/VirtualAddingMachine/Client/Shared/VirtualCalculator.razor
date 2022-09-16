@@ -1,33 +1,32 @@
-﻿@inherits LayoutComponentBase
+﻿@*
+Project Name : Virtual Adding Machine
+File : VirtualCalculator.razor
+Author : Akash Patel
+Date : 16 Sep 2022
+*@
+
+@inherits LayoutComponentBase
 @using System.Globalization
 @using System.Text
 @inject IJSRuntime JSRuntime
 
 <PageTitle>Virtual Calculator</PageTitle>
 <link rel="stylesheet" type="text/css" href="/VirtualCalculator.razor.css" />
+<link rel="shortcut icon" href="~/Images/calc.png" id="favicon">
 <body>
     <div>
         <main>
 
+            @*
+            calculator body,
+            include calculator display and all the buttons
+            *@
             <div class="calculator">
                 <div class="display">
                     <input type="text" placeholder="0" id="input" @bind="Display" />
 
-                    @*  @if (num_1 != 0)
-                    {
-                    @num_1
-                    }
-
-                    @operation
-
-                    @if (num_2 != 0)
-                    {
-                    @num_2
-
-                    }
-
-                    @result*@
                 </div>
+
                 <div class="buttons">
 
                     <input type="button" value="AC" id="clear" @onclick="Clear" />
@@ -58,6 +57,9 @@
                 </div>
             </div>
 
+            @*
+            tape roll and action buttons
+            *@
             <div class="tapeRoll">
                 <div class="tape">
                     <textarea class="calcText" id="@calculatorHistory" AutoSize="true" @bind="@tapeDisplay">
@@ -77,9 +79,22 @@
     </div>
 </body>
 
-@code {
-    decimal num_1 = 0, num_2 = 0, result = 0;
 
+@*
+backbone of the project
+*@
+@code {
+
+    decimal num_1 = 0, num_2 = 0, result = 0;               // store first input, second input and calculation result
+
+    char operation;                                         // store operation input (eg. addition, multiplication, etc..)
+    public string calculatorHistory = "calculatorHistory";  // store textarea's ID
+
+    bool isAfterDecimalPt = false;                          // flage to see if we hit the decimal point or not
+
+    int positionAfterDecimalPt = 0;                         // keep track of a digit's position after decimal and perform math accordingly
+
+    // keep track of different calculation phases 
     enum Action
     {
         None,
@@ -89,34 +104,45 @@
     };
     Enum lastAction = Action.None;
 
-    char operation;
-    bool isAfterDecimalPt = false;
-    int positionAfterDecimalPt = 0;
-
+    // to show data on calculator display
     public string? Display { get; set; }
+
+    // to show dat on tape roll
     public string? tapeDisplay { get; set; }
 
-    public string calculatorHistory = "calculatorHistory";
-
+    // reset operation on every initialization (saftey net, learnt on a blazor 101 video)
     protected override void OnInitialized()
     {
         operation = ' ';
         tapeDisplay = string.Empty;
     }
 
+    /*
+     * read an input from user and perform data parsing, handle number conversion,
+     * for whole numbers digits as well digits after decimal point
+     */
     private void Add(char input)
     {
-        bool isNumber = Decimal.TryParse(input.ToString(), out decimal number);
+        bool isNumber = Decimal.TryParse(input.ToString(), out decimal number);  // to make sure parsed number is a decimal
+        
         lastAction = Action.Input;
+
+        // if input is a number then procced 
+        // else...
         if (isNumber)
         {
-            decimal displayNumber = number;
+            decimal displayNumber = number;         // for the calculator display
+
+            // perform math on the digits after a decimal point,
+            // so accurate math can be performed 
             if (isAfterDecimalPt)
             {
                 positionAfterDecimalPt++;
                 number = number / (Convert.ToDecimal(Math.Pow(10, positionAfterDecimalPt)));
             }
 
+            // no operation inpunt then it is first number
+            // else...
             if (operation == ' ')
             {
                 if (!isAfterDecimalPt)
@@ -127,8 +153,10 @@
                 {
                     num_1 = num_1 + number;
                 }
-                Display += displayNumber.ToString(); // input
+                Display += displayNumber.ToString();
             }
+
+            // it is second number
             else
             {
                 if (!isAfterDecimalPt)
@@ -139,70 +167,110 @@
                 {
                     num_2 = num_2 + number;
                 }
-                Display += displayNumber.ToString(); // input
+                Display += displayNumber.ToString();
             }
         }
-        else // .
+
+        // it is a decimal point
+        else 
         {
+            // change the stage
             lastAction = Action.DecimalPoint;
+
             if (isAfterDecimalPt)
                 return;
 
-            Display += input.ToString();
+            Display += input.ToString(); // update calc diaplay
+
             isAfterDecimalPt = true;
         }
     }
 
+    /*
+     * Clear Entry for calculator display and,
+     * variables that stores calculation data
+     * leverages UndoLastInput() method
+     */
     private void Delete()
     {
+        // make sure the display is not emptry
         if (!String.IsNullOrWhiteSpace(Display))
         {
             Display = Display.Substring(0, Display.Length - 1);
         }
 
+        // using enum, select between stages to clear (eg. input1, input2 or operation var)
         switch (lastAction)
         {
             case Action.Operation:
                 operation = ' ';
                 break;
+
             case Action.Input:
                 UndoLastInput();
                 break;
+            
+            // also make sure if we hit the decimal point, 
+            // and set variables accordingly
             case Action.DecimalPoint:
                 isAfterDecimalPt = false;
                 positionAfterDecimalPt = 0;
                 break;
+
             default:
                 break;
         }
     }
 
+    /*
+     * Clear Entry method, which handles most of the operations operations
+     */
     private void UndoLastInput()
     {
+        // opertaion var is empty which means, there is no second input to clear
         if (operation == ' ')
         {
-            var num1Str = num_1.ToString();
+            var num1Str = num_1.ToString(); // store first input as a string to perform SubString operation
+
+            // make sure to adjust calculation variable for the digits after decimal point
             if (num1Str.Contains(".")) { positionAfterDecimalPt--; };
+
             num1Str = num1Str.Substring(0, num1Str.Length - 1);
+
+            // back to a number
             Decimal.TryParse(num1Str, out num_1);
         }
+
+        // perform same operation for second input
         else
         {
             var num2Str = num_2.ToString();
+
             if (num2Str.Contains(".")) { positionAfterDecimalPt--; };
+
             num2Str = num2Str.Substring(0, num2Str.Length - 1);
             Decimal.TryParse(num2Str, out num_2);
         }
     }
 
+    /*
+     * receive operation input to perform calculation accordingly
+     */
     private void OperationChar(char op)
     {
+        
         if (operation == ' ')
         {
+            // change the stage
             lastAction = Action.Operation;
+
             operation = op;
+            
             Display += operation;
+            
+            // reset helper decimal variables 
             isAfterDecimalPt = false;
+            
             positionAfterDecimalPt = 0;
         }
         else
@@ -211,6 +279,9 @@
         }
     }
 
+    /*
+     * perform appropriate math calculation matches the operation input 
+     */
     private void Result()
     {
         switch (operation)
@@ -233,22 +304,30 @@
                 break;
         }
 
+        // tranfer entire calculation to the tape roll and,
+        // update calc disaply 
         tapeDisplay += Display + " = " + result + "\n";
-        num_1 = result;
         Display = result.ToString();
+        
+        // make everything ready for the continuous calculation 
+        num_1 = result;
         if (Display.Contains("."))
         {
             isAfterDecimalPt = true;
             positionAfterDecimalPt = Display.Substring(Display.IndexOf(".")).Length - 1;
         }
+
+        // just clean the operation and second input for the next calculation 
         Clear(true);
     }
 
+    // helper All Clear, call main Clear function
     private void Clear()
     {
         Clear(false);
     }
 
+    // main All Clear, clear the calculator and reset variables
     private void Clear(bool keepResult)
     {
         if (!keepResult)
@@ -263,21 +342,34 @@
         num_2 = 0;
     }
 
+    // clear Tape Roll display
     private void DeleteHistory()
     {
         tapeDisplay = string.Empty;
     }
 
+    /*
+     * function to download calculation data as a taxt file
+     * make a use of JS helper function from utility file
+     */
     private async void DownloadHistory()
     {
         await JSRuntime.InvokeAsync<object>("saveFile", "CalculatorHistory.txt", tapeDisplay);
     }
 
+    /*
+       * function to print calculation data
+       * make a use of JS helper function from utility file
+       */
     private async void PrintHistory()
     {
         await JSRuntime.InvokeVoidAsync("invokePrint");
     }
 
+    /*
+       * function to let user edit calculation data
+       * make a use of JS helper function from utility file
+       */
     private async Task Focus()
     {
         await JSRuntime.InvokeVoidAsync("focusTextArea", calculatorHistory);
