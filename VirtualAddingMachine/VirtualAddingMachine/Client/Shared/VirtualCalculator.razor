@@ -1,5 +1,7 @@
 ﻿@inherits LayoutComponentBase
 @using System.Globalization
+@using System.Text
+@inject IJSRuntime JSRuntime
 
 <PageTitle>Virtual Calculator</PageTitle>
 <link rel="stylesheet" type="text/css" href="/VirtualCalculator.razor.css" />
@@ -30,27 +32,27 @@
 
                     <input type="button" value="AC" id="clear" @onclick="Clear" />
 
-                    <input type="button" value="DEL" id="erase" />
+                    <input type="button" value="DEL" id="erase" @onclick="() => Delete()" />
                     <input type="button" value="%" class="input-button btnB" @onclick="() => OperationChar('%')" />
                     <input type="button" value="/" class="input-button btnB" @onclick="() => OperationChar('/')" />
 
-                    <input type="button" value="9" class="input-button" @onclick="() => Add(9)" />
-                    <input type="button" value="8" class="input-button" @onclick="() => Add(8)" />
-                    <input type="button" value="7" class="input-button" @onclick="() => Add(7)" />
+                    <input type="button" value="9" class="input-button" @onclick="() => Add('9')" />
+                    <input type="button" value="8" class="input-button" @onclick="() => Add('8')" />
+                    <input type="button" value="7" class="input-button" @onclick="() => Add('7')" />
                     <input type="button" value="X" class="input-button btnB" @onclick="() => OperationChar('X')" />
 
-                    <input type="button" value="6" class="input-button" @onclick="() => Add(6)" />
-                    <input type="button" value="5" class="input-button" @onclick="() => Add(5)" />
-                    <input type="button" value="4" class="input-button" @onclick="() => Add(4)" />
+                    <input type="button" value="6" class="input-button" @onclick="() => Add('6')" />
+                    <input type="button" value="5" class="input-button" @onclick="() => Add('5')" />
+                    <input type="button" value="4" class="input-button" @onclick="() => Add('4')" />
                     <input type="button" value="-" class="input-button btnB" @onclick="() => OperationChar('-')" />
 
-                    <input type="button" value="3" class="input-button" @onclick="() => Add(3)" />
-                    <input type="button" value="2" class="input-button" @onclick="() => Add(2)" />
-                    <input type="button" value="1" class="input-button" @onclick="() => Add(1)" />
+                    <input type="button" value="3" class="input-button" @onclick="() => Add('3')" />
+                    <input type="button" value="2" class="input-button" @onclick="() => Add('2')" />
+                    <input type="button" value="1" class="input-button" @onclick="() => Add('1')" />
                     <input type="button" value="+" class="input-button btnB" @onclick="() => OperationChar('+')" />
 
-                    <input type="button" value="0" class="input-button" @onclick="() => Add(0)" />
-                    <input type="button" value="." class="input-button" />
+                    <input type="button" value="0" class="input-button" @onclick="() => Add('0')" />
+                    <input type="button" value="." class="input-button" @onclick="() => Add('.')" />
                     <input type="button" value="=" id="equal" @onclick="Result" />
 
                 </div>
@@ -58,15 +60,15 @@
 
             <div class="tapeRoll">
                 <div class="tape">
-                    <textarea class="calcText" AutoSize="true" @bind="@tapeDisplay">
+                    <textarea class="calcText" id="@calculatorHistory" AutoSize="true" @bind="@tapeDisplay">
 
                     </textarea>
                 </div>
                 <div class="actionBtns">
-                    <input type="button" value="edit" class="action-button" />
-                    <input type="button" value="download" class="action-button" />
-                    <input type="button" value="delete" class="action-button" />
-                    <input type="button" value="print" class="action-button" />
+                    <input type="button" value="edit" class="action-button" @onclick="() => Focus()" />
+                    <input type="button" value="download" class="action-button" @onclick="() => DownloadHistory()" />
+                    <input type="button" value="delete" class="action-button" @onclick="() => DeleteHistory()" />
+                    <input type="button" value="print" class="action-button" @onclick="() => PrintHistory()" />
                 </div>
 
             </div>
@@ -76,13 +78,25 @@
 </body>
 
 @code {
-    double num_1 = 0, num_2 = 0;
+    decimal num_1 = 0, num_2 = 0, result = 0;
+
+    enum Action
+    {
+        None,
+        Input,
+        DecimalPoint,
+        Operation
+    };
+    Enum lastAction = Action.None;
 
     char operation;
-    string? result;
+    bool isAfterDecimalPt = false;
+    int positionAfterDecimalPt = 0;
 
     public string? Display { get; set; }
     public string? tapeDisplay { get; set; }
+
+    public string calculatorHistory = "calculatorHistory";
 
     protected override void OnInitialized()
     {
@@ -90,17 +104,94 @@
         tapeDisplay = string.Empty;
     }
 
-    public void Add(char input)
+    private void Add(char input)
+    {
+        bool isNumber = Decimal.TryParse(input.ToString(), out decimal number);
+        lastAction = Action.Input;
+        if (isNumber)
+        {
+            decimal displayNumber = number;
+            if (isAfterDecimalPt)
+            {
+                positionAfterDecimalPt++;
+                number = number / (Convert.ToDecimal(Math.Pow(10, positionAfterDecimalPt)));
+            }
+
+            if (operation == ' ')
+            {
+                if (!isAfterDecimalPt)
+                {
+                    num_1 = num_1 * 10 + number;
+                }
+                else
+                {
+                    num_1 = num_1 + number;
+                }
+                Display += displayNumber.ToString(); // input
+            }
+            else
+            {
+                if (!isAfterDecimalPt)
+                {
+                    num_2 = num_2 * 10 + number;
+                }
+                else
+                {
+                    num_2 = num_2 + number;
+                }
+                Display += displayNumber.ToString(); // input
+            }
+        }
+        else // .
+        {
+            lastAction = Action.DecimalPoint;
+            if (isAfterDecimalPt)
+                return;
+
+            Display += input.ToString();
+            isAfterDecimalPt = true;
+        }
+    }
+
+    private void Delete()
+    {
+        if (!String.IsNullOrWhiteSpace(Display))
+        {
+            Display = Display.Substring(0, Display.Length - 1);
+        }
+
+        switch (lastAction)
+        {
+            case Action.Operation:
+                operation = ' ';
+                break;
+            case Action.Input:
+                UndoLastInput();
+                break;
+            case Action.DecimalPoint:
+                isAfterDecimalPt = false;
+                positionAfterDecimalPt = 0;
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void UndoLastInput()
     {
         if (operation == ' ')
         {
-            num_1 = num_1 * 10 + input;
-            Display += input.ToString();
+            var num1Str = num_1.ToString();
+            if (num1Str.Contains(".")) { positionAfterDecimalPt--; };
+            num1Str = num1Str.Substring(0, num1Str.Length - 1);
+            Decimal.TryParse(num1Str, out num_1);
         }
         else
         {
-            num_2 = num_2 * 10 + input;
-            Display += input.ToString();
+            var num2Str = num_2.ToString();
+            if (num2Str.Contains(".")) { positionAfterDecimalPt--; };
+            num2Str = num2Str.Substring(0, num2Str.Length - 1);
+            Decimal.TryParse(num2Str, out num_2);
         }
     }
 
@@ -108,11 +199,16 @@
     {
         if (operation == ' ')
         {
+            lastAction = Action.Operation;
             operation = op;
             Display += operation;
+            isAfterDecimalPt = false;
+            positionAfterDecimalPt = 0;
         }
         else
+        {
             Result();
+        }
     }
 
     private void Result()
@@ -120,50 +216,74 @@
         switch (operation)
         {
             case '+':
-                result = (num_1 + num_2).ToString();
+                result = num_1 + num_2;
                 break;
             case '-':
-                result = (num_1 - num_2).ToString();
+                result = num_1 - num_2;
                 break;
             case 'X':
-                result = (num_1 * num_2).ToString();
+                result = num_1 * num_2;
                 break;
             case '/':
                 if (num_2 > 0)
-                    result = (num_1 / num_2).ToString();
+                    result = num_1 / num_2;
                 break;
             case '%':
-                result = (num_1 % num_2).ToString();
+                result = num_1 % num_2;
                 break;
         }
 
         tapeDisplay += Display + " = " + result + "\n";
-
-        Display = result;
+        num_1 = result;
+        Display = result.ToString();
+        if (Display.Contains("."))
+        {
+            isAfterDecimalPt = true;
+            positionAfterDecimalPt = Display.Substring(Display.IndexOf(".")).Length - 1;
+        }
         Clear(true);
     }
 
-    void Clear()
+    private void Clear()
     {
         Clear(false);
     }
-    void Clear(bool flag)
+
+    private void Clear(bool keepResult)
     {
-        if (!flag)
+        if (!keepResult)
         {
-
-            result = string.Empty;
             Display = string.Empty;
-
+            result = 0;
+            num_1 = 0;
+            positionAfterDecimalPt = 0;
+            isAfterDecimalPt = false;
         }
         operation = ' ';
-        num_1 = 0;
         num_2 = 0;
     }
 
+    private void DeleteHistory()
+    {
+        tapeDisplay = string.Empty;
+    }
+
+    private async void DownloadHistory()
+    {
+        await JSRuntime.InvokeAsync<object>("saveFile", "CalculatorHistory.txt", tapeDisplay);
+    }
+
+    private async void PrintHistory()
+    {
+        await JSRuntime.InvokeVoidAsync("invokePrint");
+    }
+
+    private async Task Focus()
+    {
+        await JSRuntime.InvokeVoidAsync("focusTextArea", calculatorHistory);
+    }
 }
+
 <article class="content px-4">
     @Body
 </article>
-
-

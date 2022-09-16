@@ -1,4 +1,4 @@
-﻿ @import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
+﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
@@ -33,6 +33,17 @@ h1:focus {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
+
+@media print {
+    body * {
+        visibility: hidden;
     }
+
+    #calculatorHistory {
+        visibility: visible;
+        position: center;
+    }
+}

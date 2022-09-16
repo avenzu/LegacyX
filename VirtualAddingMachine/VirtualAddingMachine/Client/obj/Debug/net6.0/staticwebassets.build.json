@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "h7cWHN3ZQTMi3cVTgE51969sbOUkq0mWQ8eekfPofVk=",
+  "Hash": "xz8dEdNcAkfiZEwg/bnC6DARqsKA+Z7y5KFak7I9v0Q=",
   "Source": "VirtualAddingMachine.Client",
   "BasePath": "/",
   "Mode": "Root",
@@ -7257,6 +7257,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "C:\\Users\\lucif\\OneDrive\\Desktop\\LegacyX\\VirtualAddingMachine\\VirtualAddingMachine\\Client\\wwwroot\\jsUtility.js",
+      "SourceId": "VirtualAddingMachine.Client",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\lucif\\OneDrive\\Desktop\\LegacyX\\VirtualAddingMachine\\VirtualAddingMachine\\Client\\wwwroot\\",
+      "BasePath": "/",
+      "RelativePath": "jsUtility.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\jsUtility.js"
     }
   ]
 }
